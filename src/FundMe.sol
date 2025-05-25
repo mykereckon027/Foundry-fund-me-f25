@@ -15,12 +15,13 @@ contract FundMe {
 
     // Could we make this constant?  /* hint: no! We should make it immutable! */
     address private  immutable i_owner;
-    uint256 public constant MINIMUM_USD = 5 * 10 ** 18;
+    uint256 public MINIMUM_USD;
     AggregatorV3Interface private s_priceFeed;
 
-    constructor(address priceFeed) {
+    constructor(address priceFeed, uint _minimumUSD) {
         i_owner = msg.sender;
         s_priceFeed = AggregatorV3Interface(priceFeed);
+        MINIMUM_USD = _minimumUSD;
     }
 
     function fund() public payable {
