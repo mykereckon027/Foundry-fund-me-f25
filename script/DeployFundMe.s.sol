@@ -12,11 +12,12 @@ contract DeployFundMe is Script {
         HelperConfig helperConfig = new HelperConfig();
         // after startBroadcast => real txn
 
+        uint MINIMUMUSD = 5 * 1e18; // 5 usd 
         address ethUsdPriceFeed = helperConfig.activeNetworkConfig();
         // address ethUsdPriceFeed = 0xfEefF7c3fB57d18C5C6Cdd71e45D2D0b4F9377bF; // Sepolia ETH/USD Address
 
         vm.startBroadcast();
-        FundMe fundMe = new FundMe(ethUsdPriceFeed); // Sepolia ETH/USD Address
+        FundMe fundMe = new FundMe(ethUsdPriceFeed , MINIMUMUSD); // Sepolia ETH/USD Address
         // https://docs.chain.link/data-feeds/price-feeds/addresses
         vm.stopBroadcast();
         return fundMe;
